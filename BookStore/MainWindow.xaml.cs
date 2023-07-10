@@ -24,5 +24,20 @@ namespace BookStore
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtUsername.Text == "Admin" && txtPassword.Password == "adminpassword")
+            {
+                MessageBox.Show("Welcome Admin");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Wrong Username or Password", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtUsername.Text = "";
+                txtPassword.Password = "";
+            }
+        }
     }
 }
