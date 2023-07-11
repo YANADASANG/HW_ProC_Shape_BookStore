@@ -5,14 +5,21 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="bookIcon.png" />
+    <None Remove="customerIcon.png" />
     <None Remove="loginWallpaper.jpg" />
+    <None Remove="orderIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="bookIcon.png" />
+    <Resource Include="customerIcon.png" />
     <Resource Include="loginWallpaper.jpg" />
+    <Resource Include="orderIcon.png" />
   </ItemGroup>
 
 </Project>

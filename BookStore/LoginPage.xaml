@@ -13,8 +13,8 @@
         <Label Content="Book Store Manage" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Panel.ZIndex="2"/>
         <Rectangle HorizontalAlignment="Center" Height="214" Margin="0,57,0,0" VerticalAlignment="Top" Width="296" Panel.ZIndex="1" Fill="#CC1FE9F9" RadiusX="15" RadiusY="15"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Center" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="251" Panel.ZIndex="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="107,116,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Panel.ZIndex="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="106,170,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Panel.ZIndex="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="110,116,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Panel.ZIndex="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="109,170,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Panel.ZIndex="2"/>
         <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Margin="0,191,0,0" VerticalAlignment="Top" Width="251" Panel.ZIndex="2"/>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Margin="0,233,0,0" VerticalAlignment="Top" Panel.ZIndex="2" Width="56" Height="24" FontSize="10" Background="#FFFAECA7" VerticalContentAlignment="Center" BorderBrush="{x:Null}" BorderThickness="1,1,1,1" SnapsToDevicePixels="True" Click="btnLogin_Click"/>
     </Grid>

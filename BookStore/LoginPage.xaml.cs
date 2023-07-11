@@ -27,9 +27,11 @@ namespace BookStore
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (txtUsername.Text == "Admin" && txtPassword.Password == "adminpassword")
+            if (txtUsername.Text == "Admin" && txtPassword.Password == "admin123")
             {
                 MessageBox.Show("Welcome Admin");
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.Show();
                 this.Close();
             }
             else
