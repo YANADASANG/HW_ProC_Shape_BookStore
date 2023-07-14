@@ -33,7 +33,7 @@ namespace BookStore
             {
                 db.Open();
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 1; i < 6; i++)
                 {
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = db;
@@ -65,44 +65,36 @@ namespace BookStore
         public static ObservableCollection<Customer> GetData(string input)
         {
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
-            try
+            bool inputCanParse = int.TryParse(input, out int inputParsed);
+            using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
             {
-                bool inputCanParse = int.TryParse(input, out int inputParsed);
-                using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
+                db.Open();
+                string command;
+                if (inputCanParse)
                 {
-                    db.Open();
-                    string command;
-                    if (inputCanParse)
-                    {
-                        command = $" WHERE Customer_Id = {inputParsed}";
-                    }
-                    else
-                    {
-                        command = $" WHERE Customer_Name = \"{input}\"";
-                    }
-                    SqliteCommand selectCommand = new SqliteCommand
-                        ("SELECT * from Customers" + command, db);
-
-                    SqliteDataReader query = selectCommand.ExecuteReader();
-
-                    while (query.Read())
-                    {
-                        Customer customer = new Customer();
-                        customer.Customer_Id = query.GetInt32(0);
-                        customer.Customer_Name = query.GetString(1);
-                        customer.Customer_Address = query.GetString(2);
-                        customer.Customer_Email = query.GetString(3);
-                        customers.Add(customer);
-                    }
+                    command = $" WHERE Customer_Id = {inputParsed}";
                 }
+                else
+                {
+                    command = $" WHERE Customer_Name = \"{input}\"";
+                }
+                SqliteCommand selectCommand = new SqliteCommand
+                    ("SELECT * from Customers" + command, db);
 
-                return customers;
+                SqliteDataReader query = selectCommand.ExecuteReader();
+
+                while (query.Read())
+                {
+                    Customer customer = new Customer();
+                    customer.Customer_Id = query.GetInt32(0);
+                    customer.Customer_Name = query.GetString(1);
+                    customer.Customer_Address = query.GetString(2);
+                    customer.Customer_Email = query.GetString(3);
+                    customers.Add(customer);
+                }
             }
-            catch (Exception eSql)
-            {
-                Debug.WriteLine($"Exception: {eSql.Message}");
-            }
-            return null;
+
+            return customers;
         }
 
         public static void UpdateData(int id, string name, string address, string email)
@@ -120,6 +112,20 @@ namespace BookStore
                 insertCommand.Parameters.AddWithValue("@Email", email);
                 insertCommand.ExecuteReader();
 
+            }
+        }
+
+        public static void DeleteData(int id)
+        {
+            using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
+            {
+                db.Open();
+
+                SqliteCommand insertCommand = new SqliteCommand();
+                insertCommand.Connection = db;
+                insertCommand.CommandText = "DELETE FROM Customers WHERE Customer_id = @Id ;";
+                insertCommand.Parameters.AddWithValue("@Id", id);
+                insertCommand.ExecuteReader();
             }
         }
     }

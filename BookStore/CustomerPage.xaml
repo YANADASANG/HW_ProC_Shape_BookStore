@@ -25,12 +25,21 @@
                     <TextBox x:Name="txtName" HorizontalAlignment="Left" IsReadOnly="True" Margin="325,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="28" VerticalContentAlignment="Center" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0"/>
                     <TextBox x:Name="txtEmail" HorizontalAlignment="Left" IsReadOnly="True" Margin="325,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="28" VerticalContentAlignment="Center" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0"/>
                     <TextBox x:Name="txtAddress" HorizontalAlignment="Left" IsReadOnly="True" Margin="325,274,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="60" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0" HorizontalScrollBarVisibility="Auto"/>
-                    <Button x:Name="btnEdit" Content="Edit" Margin="59,406,731,0" VerticalAlignment="Top" Height="48" FontSize="18" Background="#FF121212" Foreground="White" Click="Button_Click"/>
-                    <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Right" Margin="0,406,593,0" VerticalAlignment="Top" Height="48" Width="84" FontSize="18" Foreground="#FFFFFCFC" BorderBrush="Black" Background="#FF161414"/>
+                    <Button x:Name="btnEdit" Content="Edit" Margin="59,406,731,0" VerticalAlignment="Top" Height="48" FontSize="18" Background="#FF121212" Foreground="White" Click="btnEdit_Click"/>
+                    <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Right" Margin="0,406,593,0" VerticalAlignment="Top" Height="48" Width="84" FontSize="18" Foreground="#FFFFFCFC" BorderBrush="Black" Background="#FF161414" Click="btnDelete_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Add">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Rectangle HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="756" Fill="White" Margin="59,96,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="75,119,0,0" TextWrapping="Wrap" Text="Customer Name" VerticalAlignment="Top" FontSize="24" Width="182"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="77,173,0,0" TextWrapping="Wrap" Text="Customer E-mail" VerticalAlignment="Top" FontSize="24"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="77,222,0,0" TextWrapping="Wrap" Text="Customer Adress" VerticalAlignment="Top" FontSize="24"/>
+                    <TextBox x:Name="txtAddName"  HorizontalAlignment="Left" IsReadOnly="True" Margin="325,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="28" VerticalContentAlignment="Center" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0"/>
+                    <TextBox x:Name="txtAddEmail"  HorizontalAlignment="Left" IsReadOnly="True" Margin="327,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="28" VerticalContentAlignment="Center" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0"/>
+                    <TextBox x:Name="txtAddAddress"  HorizontalAlignment="Left" IsReadOnly="True" Margin="327,224,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450" Height="60" BorderThickness="2,2,2,2" FontSize="18" Padding="5,0,0,0" HorizontalScrollBarVisibility="Auto"/>
+                    <Button x:Name="btnAdd"  Content="Add" Margin="59,406,731,0" VerticalAlignment="Top" Height="48" FontSize="18" Background="#FF121212" Foreground="White" Click="btnAdd_Click"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

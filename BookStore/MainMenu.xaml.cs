@@ -37,6 +37,7 @@ namespace BookStore
         private void btnCustomer_Click(object sender, RoutedEventArgs e)
         {
             txtCurrentMenu.Text = "Customer";
+            content.Children.RemoveAt(0);
             CustomerPage customerPage = new CustomerPage();
             customerPage.Height = 540;
             content.Children.Add(customerPage);
@@ -46,6 +47,10 @@ namespace BookStore
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
             txtCurrentMenu.Text = "Book";
+            content.Children.RemoveAt(0);
+            BookPage bookPage = new BookPage();
+            bookPage.Height = 540;
+            content.Children.Add(bookPage);
             changeColor(2);
         }
 
