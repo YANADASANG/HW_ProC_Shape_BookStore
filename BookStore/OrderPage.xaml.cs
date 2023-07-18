@@ -24,5 +24,10 @@ namespace BookStore
         {
             InitializeComponent();
         }
+
+        private void txtDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
