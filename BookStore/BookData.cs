@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,69 +62,67 @@ namespace BookStore
                 insertCommand.ExecuteReader();
             }
         }
-        public static ObservableCollection<Book> GetData(string input, string typeOfInput)
+        public static ObservableCollection<Book> GetData(string input)
         {
-            ObservableCollection<Book> customers = new ObservableCollection<Book>();
-            bool inputCanParse = int.TryParse(input, out int inputParsed);
+            ObservableCollection<Book> books = new ObservableCollection<Book>();
             using (SqliteConnection db = new SqliteConnection($"Filename=BooksTable"))
             {
                 db.Open();
                 string command;
-                if (typeOfInput)
+                string typeOfInput = "Title";
+                bool inputCanParse = int.TryParse(input, out int inputParsed);
+                if (inputCanParse)
                 {
-                    command = $" WHERE Customer_Id = {inputParsed}";
+                    typeOfInput = "ISBN";
                 }
-                else
-                {
-                    command = $" WHERE Customer_Name = \"{input}\"";
-                }
+                command = $" WHERE {typeOfInput} = \"{input}\"";
                 SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from Customers" + command, db);
+                    ("SELECT * from Books" + command, db);
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
                 while (query.Read())
                 {
-                    Customer customer = new Customer();
-                    customer.Customer_Id = query.GetInt32(0);
-                    customer.Customer_Name = query.GetString(1);
-                    customer.Customer_Address = query.GetString(2);
-                    customer.Customer_Email = query.GetString(3);
-                    customers.Add(customer);
+                    Book book = new Book();
+                    book.ISBN = query.GetString(0);
+                    book.Title = query.GetString(1);
+                    book.Description = query.GetString(2);
+                    book.Price = query.GetInt32(3);
+                    books.Add(book);
                 }
             }
 
-            return customers;
+            return books;
         }
 
-        public static void UpdateData(int id, string name, string address, string email)
+        public static void UpdateData(string ISBN, string title, string description, int price)
         {
-            using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
+            using (SqliteConnection db = new SqliteConnection($"Filename=BooksTable"))
             {
                 db.Open();
 
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = db;
-                insertCommand.CommandText = "UPDATE Customers\r\nSET Customer_Name = @Name, Address = @Address, Email = @Email \r\nWHERE Customer_Id = @Id;";
-                insertCommand.Parameters.AddWithValue("@Id", id);
-                insertCommand.Parameters.AddWithValue("@Name", name);
-                insertCommand.Parameters.AddWithValue("@Address", address);
-                insertCommand.Parameters.AddWithValue("@Email", email);
+                insertCommand.CommandText = "UPDATE Books\r\nSET Title = @Title, Description = @Description, Price = @Price \r\nWHERE ISBN = @ISBN;";
+                insertCommand.Parameters.AddWithValue("@ISBN", ISBN);
+                insertCommand.Parameters.AddWithValue("@Title", title);
+                insertCommand.Parameters.AddWithValue("@Description", description);
+                insertCommand.Parameters.AddWithValue("@Price", price);
                 insertCommand.ExecuteReader();
 
             }
         }
 
-        public static void DeleteData(int id)
+        public static void DeleteData(string ISBN)
         {
-            using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
+            using (SqliteConnection db = new SqliteConnection($"Filename=BooksTable"))
             {
                 db.Open();
 
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = db;
-                insertCommand.CommandText = "DELETE FROM Customers WHERE Customer_id = @Id ;";
-                insertCommand.Parameters.AddWithValue("@Id", id);
+                insertCommand.CommandText = "DELETE FROM Books WHERE ISBN = @ISBN ;";
+                insertCommand.Parameters.AddWithValue("@ISBN", ISBN);
                 insertCommand.ExecuteReader();
             }
         }

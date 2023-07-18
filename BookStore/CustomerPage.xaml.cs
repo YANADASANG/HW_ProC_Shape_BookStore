@@ -93,7 +93,7 @@ namespace BookStore
             }
             else if (btnAdd.Content.ToString() == "Submit")
             {
-                btnAdd.Content = "Edit";
+                btnAdd.Content = "Add";
                 CustomerData.AddData(txtAddName.Text, txtAddAddress.Text, txtAddEmail.Text);
                 txtName.IsReadOnly = true;
                 txtEmail.IsReadOnly = true;

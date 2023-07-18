@@ -26,8 +26,8 @@ namespace BookStore
         public MainMenu()
         {
             InitializeComponent();
-            CustomerData.InitializeDatabase();
-            //CustomerData.MockUpData();
+            BookData.InitializeDatabase();
+            //BookData.MockUpData();
             CustomerPage customerPage = new CustomerPage();
             customerPage.Height = 540;
             content.Children.Add(customerPage);
