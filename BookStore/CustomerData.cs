@@ -93,8 +93,25 @@ namespace BookStore
                     customers.Add(customer);
                 }
             }
-
             return customers;
+        }
+
+        public static List<int> GetCustomerId()
+        {
+            List<int> customerName = new List<int>();
+            using (SqliteConnection db = new SqliteConnection($"Filename=CustomersTable"))
+            {
+                db.Open();
+                SqliteCommand selectCommand = new SqliteCommand
+                    ("SELECT Customer_Id from Customers" , db);
+                SqliteDataReader query = selectCommand.ExecuteReader();
+                while (query.Read())
+                {
+                    customerName.Add(query.GetInt32(0));
+                }
+                db.Close();
+            }
+            return customerName;
         }
 
         public static void UpdateData(int id, string name, string address, string email)
@@ -111,7 +128,6 @@ namespace BookStore
                 insertCommand.Parameters.AddWithValue("@Address", address);
                 insertCommand.Parameters.AddWithValue("@Email", email);
                 insertCommand.ExecuteReader();
-
             }
         }
 

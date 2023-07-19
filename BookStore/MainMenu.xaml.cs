@@ -27,6 +27,9 @@ namespace BookStore
         {
             InitializeComponent();
             BookData.InitializeDatabase();
+            CustomerData.InitializeDatabase();
+            OrderData.InitializeDatabase();
+            //CustomerData.MockUpData();
             //BookData.MockUpData();
             CustomerPage customerPage = new CustomerPage();
             customerPage.Height = 540;
@@ -57,23 +60,13 @@ namespace BookStore
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
             txtCurrentMenu.Text = "Order";
+            content.Children.RemoveAt(0);
+            OrderPage orderPage = new OrderPage();
+            orderPage.Height = 540;
+            content.Children.Add(orderPage);
             changeColor(3);
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //CustomerData.AddData("test2", "test", "test");
-            //foreach (var item in CustomerData.GetData())
-            //{
-            //    MessageBox.Show(item.Customer_Name.ToString());
-            //}
-        }
-
-        private void cls_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void changeColor(int orderButton)
         {
             Button[] buttons = { btnCustomer, btnBook, btnOrder };
