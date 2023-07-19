@@ -65,6 +65,7 @@ namespace BookStore
                     order.customerId = query.GetInt32(1);
                     order.Quatity = query.GetInt32(2);
                     order.Price = query.GetInt32(3);
+                    orders.Add(order);
                 }
                 db.Close();
             }
