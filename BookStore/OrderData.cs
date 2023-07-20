@@ -50,7 +50,7 @@ namespace BookStore
             {
                 db.Open();
                 bool inputCanParse = int.TryParse(input, out int inputParsed);
-                string command = "SELECT * from Transactions GROUP BY Customer_Id";
+                string command = "SELECT * from Transactions";
                 if (inputCanParse)
                 {
                     command = $"SELECT * from Transactions WHERE Customer_Id = {inputParsed}";
@@ -71,9 +71,9 @@ namespace BookStore
             }
             return orders;
         }
-        public static List<int> GetHistoryAllId()
+        public static ObservableCollection<int> GetHistoryAllId()
         {
-            List<int> allId = new List<int>();
+            ObservableCollection<int> allId = new ObservableCollection<int>();
             using (SqliteConnection db = new SqliteConnection($"Filename=TransactionsTable"))
             {
 

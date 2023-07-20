@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="880" Loaded="UserControl_Loaded">
     <Grid Margin="0,0,0,-65">
-        <TabControl>
-            <TabItem Header="Make Order">
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <TabItem x:Name="tabMakeOrder" Header="Make Order">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="13*"/>
@@ -38,7 +38,7 @@
                     <Button x:Name="btnSubmit" Content="Submit" Margin="609,233,0,0" VerticalAlignment="Top" Height="40" FontSize="18" Background="#FF121212" Foreground="White" Grid.Column="1" Click="btnSubmit_Click" HorizontalAlignment="Left" Width="121"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="History">
+            <TabItem x:Name="tabHistory" Header="History">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
@@ -48,18 +48,18 @@
                     <ListView x:Name="historyListView" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="281" Margin="110,0,0,0" VerticalAlignment="Center" Width="662" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="18" HorizontalContentAlignment="Center">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Customer ID" Width="200">
+                                <GridViewColumn Header="Customer ID" Width="200" DisplayMemberBinding="{Binding Path=CustomerId}">
                                 </GridViewColumn>
-                                <GridViewColumn Header="ISBN of book" Width="150">
+                                <GridViewColumn Header="ISBN of book" Width="150" DisplayMemberBinding="{Binding Path=ISBN}">
                                 </GridViewColumn>
-                                <GridViewColumn Header="Quatity" Width="150">
+                                <GridViewColumn Header="Quatity" Width="150" DisplayMemberBinding="{Binding Path=Quatity}">
                                 </GridViewColumn>
-                                <GridViewColumn Header="Price" Width="150">
+                                <GridViewColumn Header="Total Price" Width="150" DisplayMemberBinding="{Binding Path=Price}">
                                 </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <ComboBox x:Name="cmbCustomerHistory" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="242,80,0,0" VerticalAlignment="Top" Width="145" FontSize="18" SelectionChanged="cmbCustomerHistory_SelectionChanged_1"/>
+                    <ComboBox x:Name="cmbCustomerHistory" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="32" Margin="242,80,0,0" VerticalAlignment="Top" Width="145" FontSize="18" SelectionChanged="cmbCustomerHistory_SelectionChanged"/>
                     <Label Content="Customer ID" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="38" Margin="110,77,0,0" VerticalAlignment="Top" Width="114" FontSize="18" RenderTransformOrigin="0.374,0.519"/>
                 </Grid>
             </TabItem>

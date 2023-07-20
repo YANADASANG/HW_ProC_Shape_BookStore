@@ -34,18 +34,17 @@ namespace BookStore
                 cmbCustomerID.Items.Add(id);
             }
             cmbCustomerHistory.Items.Add("All");
-            List<int> allId = OrderData.GetHistoryAllId();
+            ObservableCollection<int> allId = OrderData.GetHistoryAllId();
             foreach (var id in allId)
             {
                 cmbCustomerHistory.Items.Add(id);
             }
-
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             int total_Price = int.Parse(txtPrice.Text) * int.Parse(txtAmount.Text);
-            string text = $"Order of Customer ID {cmbCustomerID.SelectedItem}" + Environment.NewLine 
+            string text = $"Order of Customer ID {cmbCustomerID.SelectedItem}" + Environment.NewLine
                 + $"Book ISBN {txtISBN.Text}" + Environment.NewLine
                 + $"Book Title {txtTitle.Text}" + Environment.NewLine
                 + $"Quatity {txtAmount.Text}" + Environment.NewLine
@@ -54,12 +53,13 @@ namespace BookStore
             if (result.ToString() == "Yes")
             {
                 OrderData.AddData(txtISBN.Text, int.Parse(cmbCustomerID.SelectedItem.ToString()), int.Parse(txtAmount.Text), total_Price);
+                txtSearch.Text = string.Empty;
                 txtISBN.Text = string.Empty;
                 txtTitle.Text = string.Empty;
                 txtDescription.Text = string.Empty;
                 txtPrice.Text = string.Empty;
                 txtAmount.Text = string.Empty;
-                cmbCustomerID.SelectedIndex = 0;
+                cmbCustomerID.SelectedIndex = -1;
             }
         }
 
@@ -84,10 +84,34 @@ namespace BookStore
             }
         }
 
-        private void cmbCustomerHistory_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void cmbCustomerHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ObservableCollection<Order> orders = OrderData.GetHistory(cmbCustomerHistory.SelectedItem.ToString());
-            MessageBox.Show(orders.Count.ToString());
+            //MessageBox.Show(cmbCustomerHistory.SelectedItem.ToString());
+            if (cmbCustomerHistory.SelectedIndex != -1)
+            {
+                ObservableCollection<Order> orders = OrderData.GetHistory(cmbCustomerHistory.SelectedItem.ToString());
+                historyListView.ItemsSource = orders;
+                //MessageBox.Show(orders.Count.ToString());
+            }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabHistory.IsSelected)
+            {
+                txtSearch.Text = "";
+            }
+            else if (tabMakeOrder.IsSelected)
+            {
+                cmbCustomerHistory.Items.Clear();
+                cmbCustomerHistory.Items.Add("All");
+                ObservableCollection<int> allId = OrderData.GetHistoryAllId();
+                foreach (var id in allId)
+                {
+                    cmbCustomerHistory.Items.Add(id);
+                }
+                historyListView.ItemsSource = null;
+            }
         }
     }
 }
