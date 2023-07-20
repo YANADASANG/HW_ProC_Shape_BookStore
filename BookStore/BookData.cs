@@ -18,7 +18,7 @@ namespace BookStore
                 db.Open();
 
                 string tableCommand = "CREATE TABLE IF NOT " +
-                    "EXISTS Books (ISBN NVARCHAR(2048) PRIMARY KEY, " +
+                    "EXISTS Books (ISBN INTEGER PRIMARY KEY, " +
                     "Title NVARCHAR(2048), Description NVARCHAR(2048), Price INTEGER)";
 
                 var createTable = new SqliteCommand(tableCommand, db);
@@ -31,13 +31,14 @@ namespace BookStore
             using (SqliteConnection db = new SqliteConnection($"Filename=BooksTable"))
             {
                 db.Open();
-
+                int ISBN;
                 for (int i = 1; i < 6; i++)
                 {
+                    ISBN = int.Parse($"123456{i}");
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = db;
-                    insertCommand.CommandText = "INSERT INTO Books VALUES (@ISBN, @Title, @Description, @Price);";
-                    insertCommand.Parameters.AddWithValue("@ISBN", $"123456{i}");
+                    insertCommand.CommandText = "INSERT or IGNORE INTO Books VALUES (@ISBN, @Title, @Description, @Price);";
+                    insertCommand.Parameters.AddWithValue("@ISBN", $"{ISBN}");
                     insertCommand.Parameters.AddWithValue("@Title", $"test{i}");
                     insertCommand.Parameters.AddWithValue("@Description", $"test{i} Description");
                     insertCommand.Parameters.AddWithValue("@Price", i * 10);
@@ -54,7 +55,7 @@ namespace BookStore
 
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = db;
-                insertCommand.CommandText = "INSERT INTO Books VALUES (@ISBN, @Title, @Description, @Price);";
+                insertCommand.CommandText = "INSERT OR IGNORE INTO Books VALUES (@ISBN, @Title, @Description, @Price);";
                 insertCommand.Parameters.AddWithValue("@ISBN", ISBN);
                 insertCommand.Parameters.AddWithValue("@Title", title);
                 insertCommand.Parameters.AddWithValue("@Description", description);

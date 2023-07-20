@@ -93,12 +93,19 @@ namespace BookStore
             }
             else if (btnAdd.Content.ToString() == "Submit")
             {
-                btnAdd.Content = "Add";
-                CustomerData.AddData(txtAddName.Text, txtAddAddress.Text, txtAddEmail.Text);
-                txtName.IsReadOnly = true;
-                txtEmail.IsReadOnly = true;
-                txtAddress.IsReadOnly = true;
-                MessageBox.Show("Add");
+                if (txtAddName.Text != "" && txtAddEmail.Text != "" && txtAddAddress.Text != "")
+                {
+                    btnAdd.Content = "Add";
+                    CustomerData.AddData(txtAddName.Text, txtAddAddress.Text, txtAddEmail.Text);
+                    txtAddName.IsReadOnly = true;
+                    txtAddEmail.IsReadOnly = true;
+                    txtAddAddress.IsReadOnly = true;
+                    MessageBox.Show("Added");
+                }
+                else
+                {
+                    MessageBox.Show("Input Can not blank");
+                }
             }
         }
     }

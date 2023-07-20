@@ -37,7 +37,8 @@ namespace BookStore
                 {
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = db;
-                    insertCommand.CommandText = "INSERT INTO Customers VALUES (NULL, @Name, @Address, @Email);";
+                    insertCommand.CommandText = "INSERT OR IGNORE INTO Customers VALUES (@Id, @Name, @Address, @Email);";
+                    insertCommand.Parameters.AddWithValue("@Id", $"{i}");
                     insertCommand.Parameters.AddWithValue("@Name", $"test{i}");
                     insertCommand.Parameters.AddWithValue("@Address", $"test{i} address");
                     insertCommand.Parameters.AddWithValue("@Email", $"test{i}@gmail.com");

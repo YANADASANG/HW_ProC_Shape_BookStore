@@ -29,8 +29,8 @@ namespace BookStore
             BookData.InitializeDatabase();
             CustomerData.InitializeDatabase();
             OrderData.InitializeDatabase();
-            //CustomerData.MockUpData();
-            //BookData.MockUpData();
+            BookData.MockUpData();
+            CustomerData.MockUpData();
             CustomerPage customerPage = new CustomerPage();
             customerPage.Height = 540;
             content.Children.Add(customerPage);

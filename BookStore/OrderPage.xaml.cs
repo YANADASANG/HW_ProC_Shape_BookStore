@@ -33,12 +33,6 @@ namespace BookStore
             {
                 cmbCustomerID.Items.Add(id);
             }
-            cmbCustomerHistory.Items.Add("All");
-            ObservableCollection<int> allId = OrderData.GetHistoryAllId();
-            foreach (var id in allId)
-            {
-                cmbCustomerHistory.Items.Add(id);
-            }
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -86,12 +80,10 @@ namespace BookStore
 
         private void cmbCustomerHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //MessageBox.Show(cmbCustomerHistory.SelectedItem.ToString());
             if (cmbCustomerHistory.SelectedIndex != -1)
             {
                 ObservableCollection<Order> orders = OrderData.GetHistory(cmbCustomerHistory.SelectedItem.ToString());
                 historyListView.ItemsSource = orders;
-                //MessageBox.Show(orders.Count.ToString());
             }
         }
 
