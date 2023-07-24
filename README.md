@@ -25,6 +25,8 @@ In the main menu has 3 submenu
 - Book : used for view / add / update / delete book
 - Order : used to create book orders for customers and view order history for each customer
 
+for database this program has mockup database of Customer Database and Book Database, these databases are automatically installed when you first open the program. You also can add or edit database .
+
 
 
 ## Tech Stack
