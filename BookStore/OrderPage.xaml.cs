@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BookStore
 {
@@ -33,27 +34,41 @@ namespace BookStore
             {
                 cmbCustomerID.Items.Add(id);
             }
+            cmbCustomerHistory.Items.Clear();
+            cmbCustomerHistory.Items.Add("All");
+            ObservableCollection<int> allId = OrderData.GetHistoryAllId();
+            foreach (var id in allId)
+            {
+                cmbCustomerHistory.Items.Add(id);
+            }
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            int total_Price = int.Parse(txtPrice.Text) * int.Parse(txtAmount.Text);
-            string text = $"Order of Customer ID {cmbCustomerID.SelectedItem}" + Environment.NewLine
-                + $"Book ISBN {txtISBN.Text}" + Environment.NewLine
-                + $"Book Title {txtTitle.Text}" + Environment.NewLine
-                + $"Quatity {txtAmount.Text}" + Environment.NewLine
-                + $"Total Price {total_Price}";
-            MessageBoxResult result = MessageBox.Show(text, "", MessageBoxButton.YesNo);
-            if (result.ToString() == "Yes")
+            if (txtISBN.Text == "" && txtTitle.Text == "" && txtPrice.Text == "" && txtDescription.Text == "" && txtAmount.Text == "" && cmbCustomerID.SelectedIndex == -1)
             {
-                OrderData.AddData(txtISBN.Text, int.Parse(cmbCustomerID.SelectedItem.ToString()), int.Parse(txtAmount.Text), total_Price);
-                txtSearch.Text = string.Empty;
-                txtISBN.Text = string.Empty;
-                txtTitle.Text = string.Empty;
-                txtDescription.Text = string.Empty;
-                txtPrice.Text = string.Empty;
-                txtAmount.Text = string.Empty;
-                cmbCustomerID.SelectedIndex = -1;
+                MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                int total_Price = int.Parse(txtPrice.Text) * int.Parse(txtAmount.Text);
+                string text = $"Order of Customer ID {cmbCustomerID.SelectedItem}" + Environment.NewLine
+                    + $"Book ISBN {txtISBN.Text}" + Environment.NewLine
+                    + $"Book Title {txtTitle.Text}" + Environment.NewLine
+                    + $"Quatity {txtAmount.Text}" + Environment.NewLine
+                    + $"Total Price {total_Price}";
+                MessageBoxResult result = MessageBox.Show(text, "", MessageBoxButton.YesNo);
+                if (result.ToString() == "Yes")
+                {
+                    OrderData.AddData(txtISBN.Text, int.Parse(cmbCustomerID.SelectedItem.ToString()), int.Parse(txtAmount.Text), total_Price);
+                    txtSearch.Text = string.Empty;
+                    txtISBN.Text = string.Empty;
+                    txtTitle.Text = string.Empty;
+                    txtDescription.Text = string.Empty;
+                    txtPrice.Text = string.Empty;
+                    txtAmount.Text = string.Empty;
+                    cmbCustomerID.SelectedIndex = -1;
+                }
             }
         }
 
@@ -95,13 +110,7 @@ namespace BookStore
             }
             else if (tabMakeOrder.IsSelected)
             {
-                cmbCustomerHistory.Items.Clear();
-                cmbCustomerHistory.Items.Add("All");
-                ObservableCollection<int> allId = OrderData.GetHistoryAllId();
-                foreach (var id in allId)
-                {
-                    cmbCustomerHistory.Items.Add(id);
-                }
+                cmbCustomerHistory.SelectedIndex = -1;
                 historyListView.ItemsSource = null;
             }
         }

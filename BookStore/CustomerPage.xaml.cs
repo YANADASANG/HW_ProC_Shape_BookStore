@@ -52,6 +52,7 @@ namespace BookStore
 
             if (btnEdit.Content.ToString() == "Edit")
             {
+                txtId.IsReadOnly = false;
                 txtName.IsReadOnly = false;
                 txtEmail.IsReadOnly = false;
                 txtAddress.IsReadOnly = false;
@@ -60,25 +61,40 @@ namespace BookStore
             else if (btnEdit.Content.ToString() == "Save")
             {
                 btnEdit.Content = "Edit";
-                CustomerData.UpdateData(int.Parse(txtId.Text), txtName.Text, txtAddress.Text, txtEmail.Text);
+                txtId.IsReadOnly = true;
                 txtName.IsReadOnly = true;
                 txtEmail.IsReadOnly = true;
                 txtAddress.IsReadOnly = true;
-                MessageBox.Show("Saved");
+                if (txtId.Text == "" && txtName.Text == "" && txtEmail.Text == "" && txtAddress.Text == "")
+                {
+                    MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    CustomerData.UpdateData(int.Parse(txtId.Text), txtName.Text, txtAddress.Text, txtEmail.Text);
+                    MessageBox.Show("Saved");
+                }
             }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult Result = MessageBox.Show("Are you sure to delete this customer", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (Result.ToString() == "Yes")
+            if (txtId.Text == "" && txtName.Text == "" && txtEmail.Text == "" && txtAddress.Text == "")
             {
-                CustomerData.DeleteData(int.Parse(txtId.Text));
-                txtId.Text = "";
-                txtName.Text = "";
-                txtEmail.Text = "";
-                txtAddress.Text = "";
-                MessageBox.Show("Deleted");
+                MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBoxResult Result = MessageBox.Show("Are you sure to delete this customer", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (Result.ToString() == "Yes")
+                {
+                    CustomerData.DeleteData(int.Parse(txtId.Text));
+                    txtId.Text = "";
+                    txtName.Text = "";
+                    txtEmail.Text = "";
+                    txtAddress.Text = "";
+                    MessageBox.Show("Deleted");
+                }
             }
         }
 
@@ -93,18 +109,18 @@ namespace BookStore
             }
             else if (btnAdd.Content.ToString() == "Submit")
             {
+                btnAdd.Content = "Add";
+                txtAddName.IsReadOnly = true;
+                txtAddEmail.IsReadOnly = true;
+                txtAddAddress.IsReadOnly = true;
                 if (txtAddName.Text != "" && txtAddEmail.Text != "" && txtAddAddress.Text != "")
                 {
-                    btnAdd.Content = "Add";
-                    CustomerData.AddData(txtAddName.Text, txtAddAddress.Text, txtAddEmail.Text);
-                    txtAddName.IsReadOnly = true;
-                    txtAddEmail.IsReadOnly = true;
-                    txtAddAddress.IsReadOnly = true;
                     MessageBox.Show("Added");
+                    CustomerData.AddData(txtAddName.Text, txtAddAddress.Text, txtAddEmail.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Input Can not blank");
+                    MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

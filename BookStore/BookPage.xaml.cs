@@ -57,27 +57,41 @@ namespace BookStore
             }
             else if (btnEdit.Content.ToString() == "Save")
             {
-                BookData.UpdateData(txtISBN.Text, txtTitle.Text, txtDescription.Text, int.Parse(txtPrice.Text));
                 txtISBN.IsReadOnly = true;
                 txtTitle.IsReadOnly = true;
                 txtDescription.IsReadOnly = true;
                 txtPrice.IsReadOnly = true;
                 btnEdit.Content = "Edit";
-                MessageBox.Show("Saved");
+                if (txtISBN.Text == "" && txtTitle.Text == "" && txtDescription.Text == "" && txtPrice.Text == "")
+                {
+                    MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    BookData.UpdateData(txtISBN.Text, txtTitle.Text, txtDescription.Text, int.Parse(txtPrice.Text));
+                    MessageBox.Show("Saved");
+                }
             }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure to delete this book", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result.ToString() == "Yes")
+            if (txtISBN.Text == "" && txtTitle.Text == "" && txtDescription.Text == "" && txtPrice.Text == "")
             {
-                BookData.DeleteData(txtISBN.Text);
-                txtISBN.Text = "";
-                txtTitle.Text = "";
-                txtDescription.Text = "";
-                txtPrice.Text = "";
-                MessageBox.Show("Deleted");
+                MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure to delete this book", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result.ToString() == "Yes")
+                {
+                    BookData.DeleteData(txtISBN.Text);
+                    txtISBN.Text = "";
+                    txtTitle.Text = "";
+                    txtDescription.Text = "";
+                    txtPrice.Text = "";
+                    MessageBox.Show("Deleted");
+                }
             }
         }
 
@@ -97,8 +111,15 @@ namespace BookStore
                 txtTitle.IsReadOnly = true;
                 txtDescription.IsReadOnly = true;
                 txtPrice.IsReadOnly = true;
-                BookData.AddData(txtAddISBN.Text, txtAddTitle.Text, txtAddDescription.Text, int.Parse(txtAddPrice.Text));
-                MessageBox.Show("Add");
+                if (txtAddISBN.Text == "" && txtAddTitle.Text == "" && txtAddDescription.Text == "" && txtAddPrice.Text == "")
+                {
+                    MessageBox.Show("Input can not be blank", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    BookData.AddData(txtAddISBN.Text, txtAddTitle.Text, txtAddDescription.Text, int.Parse(txtAddPrice.Text));
+                    MessageBox.Show("Add");
+                }
             }
         }
     }
