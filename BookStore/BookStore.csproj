@@ -13,6 +13,7 @@
     <None Remove="customerIcon.png" />
     <None Remove="loginWallpaper.jpg" />
     <None Remove="orderIcon.png" />
+    <None Remove="programLogo.png" />
     <None Remove="searchIcon.png" />
   </ItemGroup>
 
@@ -25,6 +26,7 @@
     <Resource Include="customerIcon.png" />
     <Resource Include="loginWallpaper.jpg" />
     <Resource Include="orderIcon.png" />
+    <Resource Include="programLogo.png" />
     <Resource Include="searchIcon.png" />
   </ItemGroup>
 

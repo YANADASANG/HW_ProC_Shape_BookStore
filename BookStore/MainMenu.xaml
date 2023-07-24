@@ -35,7 +35,12 @@
                     <TextBlock Text="Book"/>
                 </StackPanel>
             </Button>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Height="31" RenderTransformOrigin="0.51,0.82" Margin="0,27,0,0" Foreground="White" FontWeight="Bold" FontSize="10"><Run Text="Book Store"/><LineBreak/><Run Text="Manage Program"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="68" Height="44" RenderTransformOrigin="0.51,0.82" Margin="6,19,0,0" Foreground="White" FontWeight="Bold" FontSize="10"><Run Text="Bookstore "/><LineBreak/><Run Text="Management "/><LineBreak/><Run Text="Program"/></TextBlock>
+            <Image HorizontalAlignment="Left" Height="40" Margin="74,21,0,0" VerticalAlignment="Top" Width="40" Panel.ZIndex="1" Source="/programLogo.png">
+                <Image.OpacityMask>
+                    <ImageBrush ImageSource="/programLogo.png"/>
+                </Image.OpacityMask>
+            </Image>
         </Grid>
         <TextBlock x:Name="txtCurrentMenu" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Customer" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" Foreground="#FFF9F0F0" Height="29" Width="100"/>
         <StackPanel x:Name="content" Grid.Column="1" Grid.Row="1" Background="#FFC9C8C1">
